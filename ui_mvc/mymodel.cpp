@@ -97,8 +97,8 @@ void MyModel::timerHit()
         int ind = rand() % sensors.size();
         int delta = rand() % 10;
         int num = rand() % sensors.size();
-        num = ind + num > sensors.size() ? sensors.size()-1 : ind + num;
-        for (int i = ind; i < num; i++)
+        num = ind + num >= sensors.size() ? sensors.size()-1 : ind + num;
+        for (int i = ind; i <= num; i++)
         {
             int full = sensors[i].data()->get_full();
             if (full + delta > 100)
