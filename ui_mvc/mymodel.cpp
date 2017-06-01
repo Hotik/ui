@@ -20,6 +20,18 @@ int MyModel::columnCount(const QModelIndex & /*parent*/) const
     return 4;
 }
 
+QColor get_color(size_t full)
+{
+    if (full < 40)
+        return Qt::green;
+    else if (full < 60)
+       return Qt::yellow;
+    else if (full < 80)
+        return Qt::red;
+    else
+        return Qt::darkRed;
+}
+
 QVariant MyModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole)
@@ -38,15 +50,9 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
     }
     if (role == Qt::BackgroundRole)
     {
-        size_t full = this->sensors[index.row()].data()->get_full();
-        if (full < 40)
-        {   QBrush brush(Qt::green); return brush; }
-        else if (full < 60)
-        {   QBrush brush(Qt::yellow); return brush; }
-        else if (full < 80)
-        {   QBrush brush(Qt::red); return brush; }
-        else
-        {   QBrush brush(Qt::darkRed); return brush; }
+        QColor color = get_color(this->sensors[index.row()].data()->get_full());
+        QBrush brush(color);
+        return brush;
     }
     return QVariant();
 }
