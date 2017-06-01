@@ -30,7 +30,6 @@ public slots:
     void timerHit();
 
 private:
-    QTimer *timer;
     QVector<QSharedPointer<Sensor>> sensors;
 };
 
