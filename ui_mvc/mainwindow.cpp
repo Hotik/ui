@@ -31,7 +31,6 @@ void MainWindow::on_actionopen_triggered()
     if (fileName.contains(".csv"))
     {
         FileOperations<csv_operations> op;
-        model->myUpdate();
         model->set_sensors(op.read(fileName));
     }
     else
