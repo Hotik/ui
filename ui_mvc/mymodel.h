@@ -3,7 +3,6 @@
 
 #include <QAbstractTableModel>
 #include <QSharedPointer>
-#include <QTimer>
 #include "sensor.h"
 
 class MyModel : public QAbstractTableModel
