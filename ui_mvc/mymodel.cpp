@@ -80,6 +80,15 @@ QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role)
     return QVariant();
 }
 
+void MyModel::set_sensors(QVector<QSharedPointer<Sensor>> sensors)
+{
+    this->sensors = sensors;
+    QModelIndex left =  this->index(0, 0, QModelIndex());
+    QModelIndex right = this->index(this->rowCount()-1, this->columnCount()-1, QModelIndex());
+    emit this->dataChanged(left, right);
+}
+
+
 void MyModel::timerHit()
 {
     if (sensors.size())
@@ -106,10 +115,18 @@ void MyModel::timerHit()
 void MyModel::delete_sensor(int id)
 {
     this->sensors.erase(this->sensors.begin() + id);
+    QModelIndex left =  this->index(id, 0, QModelIndex());
+    QModelIndex right = this->index(this->rowCount()-1, this->columnCount()-1, QModelIndex());
+    this->myUpdate();
+    emit this->dataChanged(left, right);
 }
 
 void MyModel::add_sensor(QString d, int x, int y)
 {
     QSharedPointer<Sensor> sensor(new Sensor(d, x, y, 0));
     this->sensors.push_back(sensor);
+    this->myUpdate();
+    QModelIndex left =  this->index(this->rowCount()-1, 0, QModelIndex());
+    QModelIndex right = this->index(this->rowCount()-1, this->columnCount()-1, QModelIndex());
+    emit this->dataChanged(left, right);
 }

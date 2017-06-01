@@ -16,7 +16,7 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const ;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    void set_sensors(QVector<QSharedPointer<Sensor>> sensors) { this->sensors = sensors; }
+    void set_sensors(QVector<QSharedPointer<Sensor>> sensors);
     QVector<QSharedPointer<Sensor>> get_sensors() { return sensors; }
     void myUpdate() {
         this->beginResetModel();
