@@ -82,6 +82,7 @@ QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role)
 
 void MyModel::set_sensors(QVector<QSharedPointer<Sensor>> sensors)
 {
+    this->myUpdate();
     this->sensors = sensors;
     QModelIndex left =  this->index(0, 0, QModelIndex());
     QModelIndex right = this->index(this->rowCount()-1, this->columnCount()-1, QModelIndex());
